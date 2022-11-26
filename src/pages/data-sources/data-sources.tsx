@@ -15,10 +15,13 @@ const DataSources = () => {
     handleCategories,
     selectedCategory,
     searchVal,
+    sortby,
   } = useContext(DataContext);
 
   const getDataSources = async () => {
-    const data = await fetchData("http://localhost:8000/api/test");
+    const data = await fetchData(
+      "https://prifina-data-mine.vercel.app/data-sources"
+    );
     handleDataSources(data);
   };
 
@@ -32,7 +35,7 @@ const DataSources = () => {
   useEffect(() => {
     console.log(dataSources);
     handleCategories();
-  }, [dataSources, selectedCategory, searchVal]);
+  }, [dataSources, selectedCategory, searchVal, sortby]);
 
   return (
     <Box textAlign="center" fontSize="xl" bg={"bgLight"} minW={"205px"}>

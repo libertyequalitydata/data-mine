@@ -5,7 +5,7 @@ import CategoriesMenu from "./CategoriesMenu";
 import { useContext } from "react";
 import DataContext from "../contexts/DataContext";
 
-const sortArr = ["All", "Recently Updated", "New", "Upcoming"];
+const sortArr = ["All", "Live", "Upcoming ", "Requested", "Sandbox"];
 
 const Sortby = () => {
   const { sortby, setSortby } = useContext(DataContext);

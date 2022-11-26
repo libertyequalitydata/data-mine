@@ -41,10 +41,61 @@ export function DataProvider({ children }: Props) {
           selectedCategory.includes(category.name)
         );
 
+  const sortbyStatus =
+    sortby === "All"
+      ? sortbyCategories
+      : sortby === "Live"
+      ? sortbyCategories.map((category: any) => {
+          const filtered =
+            category.items.length > 0
+              ? {
+                  name: category.name,
+                  items: [
+                    ...category.items.filter(
+                      (item: any) =>
+                        item.Status_.select?.name === "Live Available"
+                    ),
+                  ],
+                }
+              : category;
+          return filtered;
+        })
+      : sortby === "Requested"
+      ? sortbyCategories.map((category: any) => {
+          const filtered =
+            category.items.length > 0
+              ? {
+                  name: category.name,
+                  items: [
+                    ...category.items.filter(
+                      (item: any) => item.Status_.select === null
+                    ),
+                  ],
+                }
+              : category;
+          return filtered;
+        })
+      : sortbyCategories.map((category: any) => {
+          const filtered =
+            category.items.length > 0
+              ? {
+                  name: category.name,
+                  items: [
+                    ...category.items.filter(
+                      (item: any) =>
+                        item.Status_.select &&
+                        item.Status_.select?.name !== "Live Available"
+                    ),
+                  ],
+                }
+              : category;
+          return filtered;
+        });
+
   const sortbySearch =
     searchVal === ""
-      ? sortbyCategories
-      : sortbyCategories.map((category: any) => {
+      ? sortbyStatus
+      : sortbyStatus.map((category: any) => {
           const filtered =
             category.items.length > 0
               ? {
@@ -79,6 +130,9 @@ export function DataProvider({ children }: Props) {
         setCategories(sortbyCategories);
       } else setCategories(initialCategories);
 
+      if (sortby !== "All") {
+        setCategories(sortbyStatus);
+      }
       if (searchVal !== "") {
         setCategories(sortbySearch);
       }

@@ -9,6 +9,7 @@ import {
   MenuItem,
   MenuList,
   MenuOptionGroup,
+  Tooltip,
 } from "@chakra-ui/react";
 import CategoryIcon from "../assets/CategoryIcon";
 import { CategoryButton } from "./CategoryButton";
@@ -36,19 +37,21 @@ const CategoriesMenu = () => {
   return (
     <Flex flexGrow={"2"} display={{ base: "flex", "2xl": "none" }}>
       <Menu closeOnSelect={false}>
-        <MenuButton
-          as={Button}
-          mr={4}
-          px={0}
-          py={2}
-          transition="all 0.2s"
-          bg={"bgItem"}
-          _focus={{ outline: "none", bg: "bgItem" }}
-          _hover={{ bg: "bgItem" }}
-          _expanded={{ bg: "bgItem" }}
-        >
-          <CategoryIcon color={"whiteText"} boxSize={6} />
-        </MenuButton>
+        <Tooltip bg={"black"} label="Categories">
+          <MenuButton
+            as={Button}
+            mr={4}
+            px={0}
+            py={2}
+            transition="all 0.2s"
+            bg={"bgItem"}
+            _focus={{ outline: "none", bg: "bgItem" }}
+            _hover={{ bg: "bgItem" }}
+            _expanded={{ bg: "bgItem" }}
+          >
+            <CategoryIcon color={"whiteText"} boxSize={6} />
+          </MenuButton>
+        </Tooltip>
         <Badge
           ml="-6"
           mt="-2"
@@ -68,7 +71,7 @@ const CategoriesMenu = () => {
             border={"none"}
             zIndex={200}
             p={4}
-            height={"400px"}
+            height={"360px"}
             overflowY={"scroll"}
             style={{
               scrollbarWidth: "none",

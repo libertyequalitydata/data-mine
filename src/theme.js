@@ -27,12 +27,14 @@ const theme = extendTheme({
         bgItemD : "#1E126750",
         whiteText : "#F6F6F6",
         grayText : "#838383",
+        catHover : "#3E347B",
         searchText : "#85819E",
         searchBorder : "#332A68",
-        newTag : "#D05757",
-        updatedTag: "#8C00A3",
+        Live : "#D05757",
+        Requested: "#8C00A3",
         subTag : "#9593FFB2",
         moreTag : "#FF93FB",
+
     },
     fonts: {
       body: `Open Sans, ${base.fonts}`
@@ -65,12 +67,13 @@ const theme = extendTheme({
             select:(props)=>({
               ...base.components.Button.variants.ghost(props),
               color:"whiteText",
-              rounded:"none",
+              borderRadius:'4px',
               minW:"233px",
               maxH:"54px",
               fontWeight:600,
               justifyContent:"start",
-              _hover:{ backgroundColor: 'bgLight',border:"1px"}
+              _hover:{ backgroundColor: 'catHover'},
+              _focus:{ backgroundColor: 'bgItem'}
   
 
             })

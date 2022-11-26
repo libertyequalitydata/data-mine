@@ -41,10 +41,10 @@ const DataWrapper = ({ children }: Props) => {
                 position: "sticky",
                 top: "60px",
               }}
-              py={"8"}
+              pt={8}
+              pb={4}
             >
               <SearchInput />
-              <ShowingCategories />
               <Sortby />
             </VStack>
             {/* data sources */}

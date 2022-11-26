@@ -33,12 +33,16 @@ const Header = () => {
           onClick={onOpen}
           aria-label="Menu"
           icon={<IoMenu />}
-          display={["block", "block", "none"]}
+          display={["block", "block", "block", "block", "none"]}
         />
 
         <MobileMenu onClose={onClose} isOpen={isOpen} />
 
-        <Flex as={"nav"} gap={5} display={["none", "none", "flex"]}>
+        <Flex
+          as={"nav"}
+          gap={5}
+          display={["none", "none", "none", "none", "flex"]}
+        >
           <Button variant="square">PLATFORM</Button>
           <Button variant="square" border="1px">
             DATA MINE

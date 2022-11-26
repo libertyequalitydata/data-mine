@@ -12,7 +12,7 @@ export function CategoryButton({ category }: Props) {
       key={category}
       variant={"select"}
       fontWeight={"400"}
-      border={selectedCategory.includes(category) ? "1px" : "none"}
+      border={selectedCategory.includes(category) ? "2px" : "none"}
       onClick={() => {
         if (category !== "All") {
           const idx = selectedCategory.indexOf(category);

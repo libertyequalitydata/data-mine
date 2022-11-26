@@ -1,12 +1,23 @@
 import { Center } from "@chakra-ui/react";
-import React from "react";
-export function StatusBadge({}) {
+import { useEffect, useState } from "react";
+interface Props {
+  status: string;
+}
+export function StatusBadge({ status }: Props) {
+  const [stat, setStat] = useState<string>("");
+  useEffect(() => {}, []);
   return (
     <Center
-      fontSize={"xs"}
-      fontWeight={"bold"}
+      fontSize={"12px"}
+      fontWeight={"700"}
       color={"bgItem"}
-      bg={"primary"}
+      bg={
+        status === "Live Available"
+          ? "Live"
+          : status === "Requested"
+          ? "Requested"
+          : "primary"
+      }
       borderRadius={"base"}
       py={1}
       pr={2}
@@ -15,7 +26,11 @@ export function StatusBadge({}) {
       left={-2}
       position={"absolute"}
     >
-      New
+      {status === "Live Available"
+        ? "Live"
+        : status === "Requested"
+        ? "Requested"
+        : "Upcoming"}
     </Center>
   );
 }

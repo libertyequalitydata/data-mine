@@ -16,7 +16,7 @@ const CategoryContainner = ({ category }: any) => {
         {category.items.map((item: any) => (
           <DataCard
             name={item.Name.title[0].plain_text}
-            img={item.iconURL.url}
+            status={item.Status_.select}
           />
         ))}
       </Flex>

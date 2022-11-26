@@ -12,7 +12,7 @@ import { RequestBannerButton } from "../../component/RequestBannerButton";
 const DataConnectors = () => {
   useEffect(() => {
     axios
-      .get("http://localhost:8000/data-connectors")
+      .get("https://prifina-data-mine.vercel.app/data-connectors")
       .then((response) => response.data)
       .then((data) => {
         console.log(data);
