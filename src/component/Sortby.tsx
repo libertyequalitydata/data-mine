@@ -37,7 +37,7 @@ const Sortby = () => {
                 mb={-1}
                 _selected={{ borderBottom: "4px solid #ffffff" }}
                 _hover={{
-                  backgroundColor: "bgDark",
+                  backgroundColor: "catHover",
                   borderBottom: "4px solid #ffffff",
                 }}
                 onClick={() => setSortby(tab)}

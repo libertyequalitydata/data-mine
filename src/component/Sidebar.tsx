@@ -1,5 +1,5 @@
 import { CategoryButton } from "./CategoryButton";
-import { VStack, Button, Text } from "@chakra-ui/react";
+import { VStack, Button, Text, Badge } from "@chakra-ui/react";
 import DataContext from "../contexts/DataContext";
 import { useContext, useEffect } from "react";
 
@@ -20,6 +20,8 @@ const categories = [
 ];
 
 const Sidebar = () => {
+  const { selectedCategory } = useContext(DataContext);
+
   return (
     <VStack
       alignItems={"start"}
@@ -35,6 +37,22 @@ const Sidebar = () => {
         top: "80px",
       }}
     >
+      <Badge
+        top={10}
+        right={8}
+        colorScheme="green"
+        height={"5"}
+        width={"5"}
+        borderRadius={"full"}
+        zIndex="210"
+        bg={"primary"}
+        position={"absolute"}
+        display={selectedCategory[0] === "All" ? "none" : "flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+      >
+        {selectedCategory.length}
+      </Badge>
       <Text color={"whiteText"} fontSize="24px" textAlign={"left"}>
         Categories
       </Text>
