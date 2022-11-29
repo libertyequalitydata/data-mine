@@ -11,26 +11,16 @@ export function StatusBadge({ status }: Props) {
       fontSize={"12px"}
       fontWeight={"700"}
       color={"bgItem"}
-      bg={
-        status === "Live Available"
-          ? "Live"
-          : status === "Requested"
-          ? "Requested"
-          : "primary"
-      }
+      bg={status}
       borderRadius={"base"}
       py={1}
       pr={2}
       pl={4}
-      top={-8}
+      top={-4}
       left={-1}
       position={"absolute"}
     >
-      {status === "Live Available"
-        ? "Live"
-        : status === "Requested"
-        ? "Requested"
-        : "Upcoming"}
+      {status}
     </Center>
   );
 }

@@ -61,7 +61,9 @@ const CategoriesMenu = () => {
           borderRadius={"full"}
           zIndex="210"
           bg={"primary"}
-          display={selectedCategory[0] === "All" ? "none" : "block"}
+          display={selectedCategory[0] === "All" ? "none" : "flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
         >
           {selectedCategory.length}
         </Badge>

@@ -138,6 +138,12 @@ export function DataProvider({ children }: Props) {
       }
     }
   };
+  // shows the datasources in the first selected Category
+  const similarDataSources =
+    categories &&
+    initialCategories.find(
+      (category: any) => category.name === selectedCategory[0]
+    );
 
   return (
     <DataContext.Provider
@@ -152,6 +158,7 @@ export function DataProvider({ children }: Props) {
         setSortby,
         searchVal,
         setSearchVal,
+        similarDataSources,
       }}
     >
       {children}

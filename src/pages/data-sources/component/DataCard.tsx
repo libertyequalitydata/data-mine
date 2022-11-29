@@ -1,5 +1,6 @@
 import { StatusBadge } from "../../../component/StatusBadge";
-import { Avatar, Badge, Box, Center, Text, VStack } from "@chakra-ui/react";
+import { Avatar, Text, VStack } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 
 interface Props {
   name: string;
@@ -7,6 +8,23 @@ interface Props {
 }
 
 const DataCard = ({ name, status }: Props) => {
+  const [icon, setIcon] = useState(null);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const responce = await import(
+          `../../../assets/icons/${name
+            .toLowerCase()
+            .replace(/ /g, "-")}_icon.png`
+        );
+        setIcon(responce.default);
+      } catch (err) {
+        setIcon(null);
+      }
+    };
+    load();
+  }, [name]);
   return (
     <VStack
       spacing={8}
@@ -21,7 +39,7 @@ const DataCard = ({ name, status }: Props) => {
     >
       <Avatar
         name={name}
-        src={`./icons/${name.toLowerCase().replace(" ", "-")}_icon.png`}
+        src={icon || ""}
         borderRadius={"2xl"}
         width={"60px"}
         height={"60px"}

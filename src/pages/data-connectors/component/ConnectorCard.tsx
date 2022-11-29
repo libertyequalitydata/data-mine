@@ -1,9 +1,23 @@
-import { Flex, Image, SimpleGrid, Text, VStack, Wrap } from "@chakra-ui/react";
+import {
+  Flex,
+  Icon,
+  Image,
+  SimpleGrid,
+  Text,
+  VStack,
+  Wrap,
+} from "@chakra-ui/react";
 import { useEffect } from "react";
-import ConnectorTag from "./ConnectorTag";
 import TagContainner from "./TagContainner";
+import { MdContentCopy } from "react-icons/md";
+import { StatusBadge } from "./StatusBadge";
 
-const DataCard = () => {
+interface Props {
+  connector?: any;
+  // any props that come into the component
+}
+
+const DataCard = ({ connector }: Props) => {
   useEffect(() => {});
   return (
     <VStack
@@ -14,6 +28,8 @@ const DataCard = () => {
       borderRadius={"10px"}
       alignItems={"start"}
       width={{ base: "full", xl: "318px" }}
+      position={"relative"}
+      overflow={"hidden"}
     >
       <Wrap spacing={4}>
         <Image src={"./connector-icon.png"} />
@@ -25,15 +41,22 @@ const DataCard = () => {
         <Image src={"./connector-icon.png"} />
         <Image src={"./connector-icon.png"} />
       </Wrap>
-      <Text color={"whiteText"} fontSize={"lg"} fontWeight={600}>
-        Prifina/routePurchaseRate
+
+      <Flex gap={1}>
+        <Text color={"#FFFFFF60"} fontSize={"18px"} fontWeight={600}>
+          Prifina/
+        </Text>
+        <Text color={"whiteText"} fontSize={"18px"} fontWeight={600}>
+          {connector.name}
+        </Text>
+        <Icon ml={4} as={MdContentCopy} color={"#FFFFFF60"} />
+      </Flex>
+
+      <Text color={"whiteText"} fontSize={"md"} textAlign={"left"}>
+        {connector.text}
       </Text>
-      <Text color={"whiteText"} fontSize={"md"}>
-        Compare historical purchace data,
-        <br />
-        location and GPS and ratings data.
-      </Text>
-      <TagContainner tags={["sleep", "Health and Fitness", "security"]} />
+      <TagContainner tags={connector.tags} />
+      <StatusBadge status={connector.status} />
     </VStack>
   );
 };

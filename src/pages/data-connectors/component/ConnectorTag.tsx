@@ -1,19 +1,21 @@
-import { Button } from "@chakra-ui/react";
+import { Button, Flex } from "@chakra-ui/react";
 interface props {
   text: string;
 }
 
 const ConnectorTag = ({ text }: props) => {
   return (
-    <Button
-      bg={"subTag"}
-      px={"4"}
+    <Flex
+      bg={text.includes("+") ? "moreTag" : "subTag"}
+      px={"3"}
+      py={1}
       borderRadius={"full"}
       fontWeight={700}
+      fontSize={"12px"}
       color={"bgItem"}
     >
       {text}
-    </Button>
+    </Flex>
   );
 };
 export default ConnectorTag;
