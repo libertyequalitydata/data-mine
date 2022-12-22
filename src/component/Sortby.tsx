@@ -4,6 +4,7 @@ import SortbyMenu from "./SortbyMenu";
 import CategoriesMenu from "./CategoriesMenu";
 import { useContext } from "react";
 import DataContext from "../contexts/DataContext";
+import FilterMenu from "./FilterMenu";
 
 const sortArr = ["All", "Live", "Upcoming ", "Requested", "Sandbox"];
 
@@ -13,12 +14,14 @@ const Sortby = () => {
   return (
     <>
       <Flex
+        maxW={"1040px"}
         color={"whiteText"}
         gap={6}
-        pl={{ base: "none", "2xl": 6 }}
+        // pl={{ base: "none", "2xl": 6 }}
         width={"full"}
+        flexWrap={{ base: "wrap", sm: "nowrap" }}
       >
-        <Text
+        {/* <Text
           fontSize="xl"
           fontWeight={600}
           display={{ base: "none", "2xl": "flex" }}
@@ -46,8 +49,12 @@ const Sortby = () => {
               </Tab>
             ))}
           </TabList>
-        </Tabs>
+        </Tabs> */}
+
         <CategoriesMenu />
+        <Flex flexGrow={[0, 0, 1]}>
+          <FilterMenu />
+        </Flex>
         <SortbyMenu />
         <RequestButton />
       </Flex>

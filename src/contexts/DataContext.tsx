@@ -26,8 +26,9 @@ interface Props {
 export function DataProvider({ children }: Props) {
   const [dataSources, setDataSources] = useState(null);
   const [categories, setCategories] = useState<any>(null);
-  const [selectedCategory, setSelectedCategory] = useState(["All"]);
+  const [selectedCategory, setSelectedCategory] = useState<[string]>(["All"]);
   const [sortby, setSortby] = useState("All");
+  const [filter, setFilter] = useState("All");
   const [searchVal, setSearchVal] = useState("");
 
   const handleDataSources = (data: any) => {
@@ -112,6 +113,38 @@ export function DataProvider({ children }: Props) {
           return filtered;
         });
 
+  const sortbyFilter =
+    filter === "All"
+      ? sortbySearch
+      : filter === "Dynamic Data"
+      ? sortbySearch.map((category: any) => {
+          const filtered =
+            category.items.length > 0
+              ? {
+                  name: category.name,
+                  items: [
+                    ...category.items.filter(
+                      (item: any) => item["Dynamic Data"].has_more
+                    ),
+                  ],
+                }
+              : category;
+          return filtered;
+        })
+      : sortbySearch.map((category: any) => {
+          const filtered =
+            category.items.length > 0
+              ? {
+                  name: category.name,
+                  items: [
+                    ...category.items.filter(
+                      (item: any) => item["Dynamic Data"].has_more === false
+                    ),
+                  ],
+                }
+              : category;
+          return filtered;
+        });
   const handleCategories = () => {
     if (dataSources && categories == null) {
       [...dataSources].map((source: any) => {
@@ -136,6 +169,9 @@ export function DataProvider({ children }: Props) {
       if (searchVal !== "") {
         setCategories(sortbySearch);
       }
+      if (filter !== "All") {
+        setCategories(sortbyFilter);
+      }
     }
   };
   // shows the datasources in the first selected Category
@@ -159,6 +195,8 @@ export function DataProvider({ children }: Props) {
         searchVal,
         setSearchVal,
         similarDataSources,
+        filter,
+        setFilter,
       }}
     >
       {children}
