@@ -35,7 +35,7 @@ const categories = [
 const CategoriesMenu = () => {
   const { selectedCategory } = useContext(DataContext);
   return (
-    <Flex flexGrow={"2"} display={{ base: "flex", "2xl": "none" }}>
+    <Flex display={{ base: "flex", "2xl": "none" }}>
       <Menu closeOnSelect={false}>
         <Tooltip bg={"black"} label="Categories">
           <MenuButton

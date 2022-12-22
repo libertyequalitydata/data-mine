@@ -25,6 +25,7 @@ const SearchInput = () => {
 
   return (
     <Flex
+      maxW={"1040px"}
       gap={4}
       width={"full"}
       direction={["column", "row"]}

@@ -24,9 +24,10 @@ const theme = extendTheme({
         bgDark : "#09003D",
         bgLight : "#130C45",
         bgItem : "#1E1267",
-        bgItemD : "#1E126750",
+        bgItemD : "#1A105C",
         whiteText : "#F6F6F6",
         grayText : "#838383",
+        linkText:"#5792F3",
         catHover : "#3E347B",
         searchText : "#85819E",
         searchBorder : "#332A68",
@@ -34,6 +35,10 @@ const theme = extendTheme({
         Requested: "#8C00A3",
         subTag : "#9593FFB2",
         moreTag : "#FF93FB",
+        breadcrumb: "#A1A1A1",
+        tableBorder:"#6D659C",
+        dynamicColor:"#FF6B00",
+        menuSelect:"#958EC2"
 
     },
     fonts: {

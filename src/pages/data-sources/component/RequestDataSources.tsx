@@ -15,7 +15,6 @@ const RequestDataSources = () => {
       borderRadius={"xl"}
       overflow={"hidden"}
       alignSelf={"flex-start"}
-      width={"916px"}
     >
       <Text
         fontSize={"24px"}
