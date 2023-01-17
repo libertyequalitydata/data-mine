@@ -71,7 +71,9 @@ const SourceData = () => {
           >
             {name}
           </Heading>
-          <IsDynamic dynamic={filtred?.["Dynamic Data"].has_more} />
+          <IsDynamic
+            dynamic={filtred["Dynamic Data"].relation[0]?.id !== undefined}
+          />
         </Flex>
         <VStack
           alignItems={"start"}
@@ -117,17 +119,8 @@ const SourceData = () => {
           </Flex>
 
           {/* related apps */}
-          <VStack gap={6}>
-            <Text
-              color={"whiteText"}
-              textAlign={"left"}
-              width={"full"}
-              fontSize={"24px"}
-            >
-              Related Apps
-            </Text>
-            <RelatedApps relatedApps={filtred?.relatedApps.formula.string} />
-          </VStack>
+
+          <RelatedApps relatedApps={filtred?.relatedApps.formula.string} />
 
           {/* similar data sources */}
           {categories && (

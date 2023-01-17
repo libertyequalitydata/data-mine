@@ -47,7 +47,7 @@ function TableFooter({
       justifyContent={"space-between"}
       colSpan={{ base: 2, lg: 4 }}
     >
-      <Flex width={"full"} alignItems={"center"}>
+      <Flex width={"full"} alignItems={"center"} flexWrap={"wrap"}>
         <Text color={"primary"}>Rows per page:</Text>
         <Menu>
           <MenuButton
@@ -83,7 +83,7 @@ function TableFooter({
           </MenuList>
         </Menu>
       </Flex>
-      <HStack gap={4}>
+      <HStack gap={[2, 2, 4]} flexWrap={{ base: "wrap", sm: "nowrap" }}>
         <Text color={"primary"}>
           {startRange < 0 ? 1 : startRange}-
           {endRange > attributes.length ? attributes.length : endRange} of{" "}

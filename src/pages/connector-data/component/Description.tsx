@@ -39,10 +39,11 @@ const Description = ({ name }: Props) => {
       <VStack
         alignItems={{ base: "center", lg: "start" }}
         gap={4}
-        pt={{ base: 14, lg: 4 }}
-        pb={4}
+        // pt={{ base: 14, lg: 4 }}
+        // pb={4}
         pl={{ base: 0, lg: 12 }}
-        borderLeft={{ base: "0px", lg: "1px" }}
+        borderColor={"breadcrumb"}
+        borderLeftWidth={{ base: "0px", lg: "1px" }}
       >
         <Flex gap={2}>
           <Text fontSize={"24px"} fontWeight={700}>

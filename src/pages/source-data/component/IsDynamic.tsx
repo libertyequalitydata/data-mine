@@ -3,7 +3,7 @@ import { IoLayers } from "react-icons/io5";
 import DynamicIcon from "../../../assets/DynamicIcon";
 
 interface Props {
-  dynamic: string;
+  dynamic: boolean;
 }
 
 const IsDynamic = ({ dynamic }: Props) => {

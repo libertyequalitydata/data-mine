@@ -20,17 +20,21 @@ export const ZoomTable = ({ attributes, filtred }: Props) => {
   const zoomAttributes = filtred.dataObjectsNames.formula.string
     .split(",")
     .map((item: string, idx: number) => {
-      return {
-        objectName: item,
-        Objectid: filtred["Data Objects (All)"].relation[idx].id,
-        att: attributes.filter((item: any) =>
-          item.properties["Object(s) using this"].relation.find(
-            (obj: any) =>
-              obj.id === filtred["Data Objects (All)"].relation[idx].id
-          )
-        ),
-      };
+      if (item !== "") {
+        return {
+          objectName: item,
+          Objectid: filtred["Data Objects (All)"].relation[idx]?.id,
+          att: attributes.filter((item: any) =>
+            item.properties["Object(s) using this"].relation.find(
+              (obj: any) =>
+                obj.id === filtred["Data Objects (All)"].relation[idx].id
+            )
+          ),
+        };
+      }
     });
+
+  console.log(zoomAttributes);
 
   useEffect(() => {
     const arr = zoomAttributes.slice(startRange - 1, endRange);
@@ -54,9 +58,8 @@ export const ZoomTable = ({ attributes, filtred }: Props) => {
       shadow={"xs"}
     >
       <ZoomHead />
-      {attributesRange.map((attribute) => (
-        <ZoomRow attribute={attribute} />
-      ))}
+      {attributesRange[0] &&
+        attributesRange.map((attribute) => <ZoomRow attribute={attribute} />)}
       <ZoomFooter
         rows={rows}
         setRows={setRows}

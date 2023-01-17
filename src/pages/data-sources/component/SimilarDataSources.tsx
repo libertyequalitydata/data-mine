@@ -26,7 +26,7 @@ const SimilarDataSources = () => {
             <DataCard
               name={item.Name.title[0].plain_text}
               status={item.Status_.select}
-              isDynamic={item["Dynamic Data"].has_more}
+              isDynamic={item["Dynamic Data"].relation[0]?.id !== undefined}
             />
           ))}
       </Flex>

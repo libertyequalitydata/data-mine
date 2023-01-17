@@ -54,7 +54,8 @@ const Description = ({ name, description }: Props) => {
         gap={6}
         pt={{ base: 14, lg: 4 }}
         pl={{ base: 0, lg: 12 }}
-        borderLeft={{ base: "0px", lg: "1px" }}
+        borderColor={"breadcrumb"}
+        borderLeftWidth={{ base: "0px", lg: "1px" }}
       >
         <Text fontSize={"24px"} fontWeight={700}>
           About {name}

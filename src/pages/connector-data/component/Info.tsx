@@ -2,7 +2,7 @@ import { Divider, Text, VStack } from "@chakra-ui/react";
 
 const Info = () => {
   return (
-    <VStack gap={2} color={"whiteText"} align={"center"} width={"full"}>
+    <VStack pt={10} gap={2} color={"whiteText"} align={"center"} width={"full"}>
       <Text fontSize={"24px"} fontWeight={700} textAlign={"center"}>
         How Do Data Connectors Work?
       </Text>

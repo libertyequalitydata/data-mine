@@ -12,11 +12,16 @@ const Breadcrumbs = ({ name, category }: Props) => {
   const navigate = useNavigate();
 
   return (
-    <Flex alignItems={"center"} color={"breadcrumb"}>
+    <Flex
+      alignItems={"center"}
+      color={"breadcrumb"}
+      fontSize={["14px", "16px"]}
+      flexWrap={["wrap", "wrap", "nowrap"]}
+    >
       <Icon
         as={IoArrowBack}
         fontSize={"3xl"}
-        mr={10}
+        mr={[4, 4, 10]}
         color={"whiteText"}
         onClick={() => navigate("/data-connectors")}
         _hover={{ cursor: "pointer" }}

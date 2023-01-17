@@ -22,15 +22,21 @@ const SimilarDataSources = ({ category }: Props) => {
 
   useEffect(() => {
     if (
-      refScroll.current.scrollWidth >
-      refScroll.current.clientWidth + scrollX
+      refScroll.current.scrollWidth - refScroll.current.clientWidth >
+      scrollX
     ) {
       setIsScroll(true);
     } else setIsScroll(false);
   });
 
   return (
-    <Flex width={"full"} position={"relative"}>
+    <Flex
+      width={"full"}
+      position={"relative"}
+      onTouchEnd={() => {
+        setScrollX(refScroll.current.scrollLeft);
+      }}
+    >
       <VStack
         position={"absolute"}
         top={0}
@@ -48,13 +54,9 @@ const SimilarDataSources = ({ category }: Props) => {
           aria-label="scroll"
           icon={<Icon as={IoChevronForward} />}
           onClick={() => {
-            if (
-              scrollX + refScroll.current.clientWidth <
-              refScroll.current.scrollWidth
-            ) {
-              refScroll.current.scrollBy(200, 0);
-              setScrollX((prev) => prev + 200);
-            } else setIsScroll(false);
+            const scroll = refScroll.current.scrollLeft + 200;
+            setScrollX(scroll);
+            refScroll.current.scrollLeft += 200;
           }}
         />
       </VStack>
@@ -67,7 +69,7 @@ const SimilarDataSources = ({ category }: Props) => {
         bgGradient="linear(to-r, bgLight 10%, #00000001)"
         justify={"center"}
         align={"start"}
-        display={scrollX ? "flex" : "none"}
+        display={scrollX > 0 ? "flex" : "none"}
         zIndex={200}
       >
         <IconButton
@@ -75,8 +77,10 @@ const SimilarDataSources = ({ category }: Props) => {
           aria-label="scroll"
           icon={<Icon as={IoChevronBack} />}
           onClick={() => {
-            refScroll.current.scrollBy(-200, 0);
-            setScrollX((prev) => prev - 200);
+            const scroll = refScroll.current.scrollLeft - 200;
+            setScrollX(scroll);
+
+            refScroll.current.scrollLeft -= 200;
           }}
         />
       </VStack>
@@ -102,7 +106,7 @@ const SimilarDataSources = ({ category }: Props) => {
             <DataCard
               name={item.Name.title[0].plain_text}
               status={item.Status_.select}
-              isDynamic={item["Dynamic Data"].has_more}
+              isDynamic={item["Dynamic Data"].relation[0]?.id !== undefined}
             />
           ))}
       </Flex>

@@ -8,6 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { useContext } from "react";
 import { IoChevronDown, IoFunnelOutline } from "react-icons/io5";
+import CircleIcon from "../assets/Circle";
 import FunnelIcon from "../assets/FunnelIcon";
 import DataContext from "../contexts/DataContext";
 
@@ -31,6 +32,14 @@ const FilterMenu = () => {
         _hover={{ bg: "bgItem" }}
         _expanded={{ bg: "bgItem" }}
       >
+        <CircleIcon
+          display={filter == "All" ? "none" : "flex"}
+          right={-2}
+          top={-2}
+          position={"absolute"}
+          boxSize={5}
+          color={"primary"}
+        />
         <FunnelIcon boxSize={5} mr={2} />
         Filter
       </MenuButton>

@@ -124,7 +124,8 @@ export function DataProvider({ children }: Props) {
                   name: category.name,
                   items: [
                     ...category.items.filter(
-                      (item: any) => item["Dynamic Data"].has_more
+                      (item: any) =>
+                        item["Dynamic Data"].relation[0]?.id !== undefined
                     ),
                   ],
                 }
@@ -138,7 +139,7 @@ export function DataProvider({ children }: Props) {
                   name: category.name,
                   items: [
                     ...category.items.filter(
-                      (item: any) => item["Dynamic Data"].has_more === false
+                      (item: any) => !item["Dynamic Data"].relation[0]
                     ),
                   ],
                 }
