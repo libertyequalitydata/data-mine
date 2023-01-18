@@ -1,16 +1,9 @@
-import {
-  Flex,
-  Icon,
-  Image,
-  SimpleGrid,
-  Text,
-  VStack,
-  Wrap,
-} from "@chakra-ui/react";
+import { Flex, Icon, Image, Text, VStack, Wrap } from "@chakra-ui/react";
 import { useEffect } from "react";
 import TagContainner from "./TagContainner";
 import { MdContentCopy } from "react-icons/md";
 import { StatusBadge } from "./StatusBadge";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   connector?: any;
@@ -18,18 +11,33 @@ interface Props {
 }
 
 const DataCard = ({ connector }: Props) => {
+  const navigate = useNavigate();
+
   useEffect(() => {});
   return (
     <VStack
       spacing={4}
       p={8}
       pt={14}
-      bgGradient="linear(to-t, bgItem, bgItem 34%)"
+      bgGradient="linear(to-t, bgItem, bgItemD)"
       borderRadius={"10px"}
       alignItems={"start"}
       width={{ base: "full", xl: "318px" }}
       position={"relative"}
       overflow={"hidden"}
+      _hover={{
+        cursor: "pointer",
+        background: "bgItem",
+        boxShadow: " inset 0px 0px 0px 1px  #6AD9C1",
+      }}
+      onClick={() =>
+        navigate(
+          `/data-connectors/${connector.name
+            .toLowerCase()
+            .trim()
+            .replace(/ /g, "-")}`
+        )
+      }
     >
       <Wrap spacing={4}>
         <Image src={"./connector-icon.png"} />

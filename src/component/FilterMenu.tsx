@@ -1,25 +1,27 @@
 import {
   Button,
+  color,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
-  Text,
 } from "@chakra-ui/react";
 import { useContext } from "react";
-import { IoChevronDown } from "react-icons/io5";
+import { IoChevronDown, IoFunnelOutline } from "react-icons/io5";
+import CircleIcon from "../assets/Circle";
+import FunnelIcon from "../assets/FunnelIcon";
 import DataContext from "../contexts/DataContext";
 
-const sortArr = ["All", "Live", "Upcoming ", "Requested", "Sandbox"];
+const filterArr = ["All", "Dynamic Data", "Non-Dynamic Data"];
 
-const SortbyMenu = () => {
-  const { sortby, setSortby } = useContext(DataContext);
-
+const FilterMenu = () => {
+  const { filter, setFilter } = useContext(DataContext);
   return (
     <Menu>
       <MenuButton
         // display={{ base: "flex", "2xl": "none" }}
-        width={"185px"}
+
+        width={{ base: "100px", md: "150px" }}
         textAlign={"left"}
         as={Button}
         px={4}
@@ -29,37 +31,37 @@ const SortbyMenu = () => {
         _focus={{ outline: "none", bg: "bgItem" }}
         _hover={{ bg: "bgItem" }}
         _expanded={{ bg: "bgItem" }}
-        rightIcon={<IoChevronDown />}
       >
-        {sortby}
-        <Text
-          top={"-4"}
+        <CircleIcon
+          display={filter == "All" ? "none" : "flex"}
+          right={-2}
+          top={-2}
           position={"absolute"}
-          fontSize={"10px"}
-          fontWeight={"600"}
-          display={["none", "flex"]}
-        >
-          SORT BY
-        </Text>
+          boxSize={5}
+          color={"primary"}
+        />
+        <FunnelIcon boxSize={5} mr={2} />
+        Filter
       </MenuButton>
       <MenuList
         bg={"bgItem"}
         border={"none"}
         zIndex={200}
+        // p={4}
         py={0}
         gap={2}
         fontSize={"md"}
       >
-        {sortArr.map((item) => (
+        {filterArr.map((item) => (
           <MenuItem
             borderRadius={"4px"}
             py={2}
             // border={item === filter ? "2px" : "none"}
-            bg={item === sortby ? "menuSelect" : "bgItem"}
-            color={item === sortby ? "black" : "whiteText"}
+            bg={item === filter ? "menuSelect" : "bgItem"}
+            color={item === filter ? "black" : "whiteText"}
             _hover={{ bg: "catHover", color: "whiteText" }}
-            _focus={{ bg: `${item === sortby ? "menuSelect" : "bgItem"}` }}
-            onClick={() => setSortby(item)}
+            _focus={{ bg: `${item === filter ? "menuSelect" : "bgItem"}` }}
+            onClick={() => setFilter(item)}
           >
             {item}
           </MenuItem>
@@ -68,4 +70,4 @@ const SortbyMenu = () => {
     </Menu>
   );
 };
-export default SortbyMenu;
+export default FilterMenu;

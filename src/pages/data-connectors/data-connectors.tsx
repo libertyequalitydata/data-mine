@@ -1,13 +1,10 @@
-import { Box, Text, VStack } from "@chakra-ui/react";
+import { Box, VStack } from "@chakra-ui/react";
 import DataWrapper from "../../component/DataWrapper";
 import Header from "../../component/Header";
 import Hero from "./component/Hero";
-import { useEffect, useContext, useState } from "react";
-import DataContext from "../../contexts/DataContext";
-import ConnectorCard from "./component/ConnectorCard";
+import { useEffect } from "react";
 import ConnectorCardList from "./component/ConnectorCardList";
 import axios from "axios";
-import { RequestBannerButton } from "../../component/RequestBannerButton";
 
 const DataConnectors = () => {
   useEffect(() => {
