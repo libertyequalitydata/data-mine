@@ -47,5 +47,6 @@
   },
   "devDependencies": {
     "@types/webpack-env": "^1.18.0"
-  }
+  },
+  "proxy": "http://localhost:8000"
 }

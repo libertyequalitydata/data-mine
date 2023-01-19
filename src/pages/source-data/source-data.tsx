@@ -17,11 +17,9 @@ const SourceData = () => {
   const { categories, handleDataSources, handleCategories, dataSources } =
     useContext(DataContext);
 
-  // fetch data sources if for some reson the DataContext has no data
+  // fetch data sources if for some reason the DataContext has no data
   const getDataSources = async () => {
-    const data = await fetchData(
-      "https://prifina-data-mine.vercel.app/data-sources"
-    );
+    const data = await fetchData("/api/data-sources");
     handleDataSources(data);
   };
 
