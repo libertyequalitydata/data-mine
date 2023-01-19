@@ -1,5 +1,5 @@
 import CategoryContainner from "./CategoryContainner";
-import { Text, VStack } from "@chakra-ui/react";
+import { Skeleton, Stack, Text, VStack } from "@chakra-ui/react";
 import { useEffect, useContext } from "react";
 import DataContext from "../../../contexts/DataContext";
 import RequestDataSources from "./RequestDataSources";
@@ -22,15 +22,23 @@ const CateoryCardList = () => {
                 <CategoryContainner category={category} />
               )
           )}
-        {categories && categories.every((cat: any) => cat.items.length === 0) && (
-          <Text color={"whiteText"} fontSize={"24px"} fontWeight={600}>
-            No Results Found
-          </Text>
-        )}
+        {categories &&
+          categories.every((cat: any) => cat.items.length === 0) && (
+            <Text color={"whiteText"} fontSize={"24px"} fontWeight={600}>
+              No Results Found
+            </Text>
+          )}
         {!categories && (
-          <Text color={"whiteText"} fontSize={"24px"} fontWeight={600}>
-            Loading ...
-          </Text>
+          <>
+            <Text color={"whiteText"} fontSize={"24px"} fontWeight={600}>
+              Loading ...
+            </Text>
+            <Stack>
+              <Skeleton height="20px" />
+              <Skeleton height="20px" />
+              <Skeleton height="20px" />
+            </Stack>
+          </>
         )}
       </VStack>
       <RequestDataSources />
