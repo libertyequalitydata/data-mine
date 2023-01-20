@@ -23,20 +23,6 @@ const ConnectorData = () => {
         <Description name={param.name || ""} />
         <Info />
         <DataAttributes />
-        {/* {categories && (
-      <>
-        <Text
-          color={"whiteText"}
-          textAlign={"left"}
-          width={"full"}
-          fontSize={"24px"}
-        >
-          Similar Data Sources
-        </Text>
-
-        <SimilarDataSources category={category} />
-      </>
-    )} */}
       </VStack>
     </VStack>
   );

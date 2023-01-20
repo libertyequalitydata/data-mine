@@ -1,9 +1,10 @@
-import { Center, Flex, Text, VStack } from "@chakra-ui/react";
+import { Center, Flex, HStack, Skeleton, Text, VStack } from "@chakra-ui/react";
 import { fetchData } from "../../../utils/fetcher";
 import { AttributesTable } from "./data-table/AttributesTable";
 import { useEffect, useRef, useState } from "react";
 import AttributesMenu from "./AttributesMenu";
 import { ZoomTable } from "./zoom-table/ZoomTable";
+import LoadingAttributes from "./LoadingAttributes";
 
 interface Props {
   sourceID: string;
@@ -16,9 +17,7 @@ const DataAttributes = ({ sourceID, filtred }: Props) => {
   const [zoom, setZoom] = useState<boolean>(false);
 
   const getAttributes = async () => {
-    const data = await fetchData(
-      `https://prifina-data-mine.vercel.app/data-sources/${sourceID}`
-    );
+    const data = await fetchData(`/api/data-sources/${sourceID}`);
     let arr = data.results;
     setAttributes(arr);
 
@@ -28,9 +27,7 @@ const DataAttributes = ({ sourceID, filtred }: Props) => {
   };
 
   const getNextCursor = async (id: string, prev: any) => {
-    const data = await fetchData(
-      `https://prifina-data-mine.vercel.app/data-sources/${sourceID}/${id}`
-    );
+    const data = await fetchData(`/api/data-sources/${sourceID}/${id}`);
     let arr = [...prev, ...data.results];
 
     setAttributes(arr);
@@ -65,7 +62,11 @@ const DataAttributes = ({ sourceID, filtred }: Props) => {
       </Flex>
 
       <Center bg={"bgItem"} px={4} py={2} w={"full"}>
+        {/* loading table */}
+        {attributes == null && <LoadingAttributes />}
+        {/* attributes table */}
         {attributes && !zoom && <AttributesTable attributes={attributes} />}
+        {/* zoom table */}
         {attributes && zoom && (
           <ZoomTable attributes={attributes} filtred={filtred} />
         )}
