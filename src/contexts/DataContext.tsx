@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useMemo, useState } from "react";
 import { ReactNode } from "react";
 
 const initialCategories: any[] = [
@@ -35,68 +35,111 @@ export function DataProvider({ children }: Props) {
     setDataSources(data);
   };
 
-  const sortbyCategories =
-    selectedCategory[0] === "All"
-      ? initialCategories
-      : initialCategories.filter((category) =>
-          selectedCategory.includes(category.name)
-        );
+  const sortbyCategories = useMemo(
+    () =>
+      selectedCategory[0] === "All"
+        ? initialCategories
+        : initialCategories.filter((category) => {
+            return selectedCategory.includes(category.name);
+          }),
+    [selectedCategory]
+  );
 
-  const sortbyStatus =
-    sortby === "All"
-      ? sortbyCategories
-      : sortby === "Live"
-      ? sortbyCategories.map((category: any) => {
-          const filtered =
-            category.items.length > 0
-              ? {
-                  name: category.name,
-                  items: [
-                    ...category.items.filter(
-                      (item: any) =>
-                        item.Status_.select?.name === "Live Available"
-                    ),
-                  ],
-                }
-              : category;
-          return filtered;
-        })
-      : sortby === "Requested"
-      ? sortbyCategories.map((category: any) => {
-          const filtered =
-            category.items.length > 0
-              ? {
-                  name: category.name,
-                  items: [
-                    ...category.items.filter(
-                      (item: any) => item.Status_.select === null
-                    ),
-                  ],
-                }
-              : category;
-          return filtered;
-        })
-      : sortbyCategories.map((category: any) => {
-          const filtered =
-            category.items.length > 0
-              ? {
-                  name: category.name,
-                  items: [
-                    ...category.items.filter(
-                      (item: any) =>
-                        item.Status_.select &&
-                        item.Status_.select?.name !== "Live Available"
-                    ),
-                  ],
-                }
-              : category;
-          return filtered;
-        });
+  const sortbyStatus = useMemo(
+    () =>
+      sortby === "All"
+        ? sortbyCategories
+        : sortby === "Live"
+        ? sortbyCategories.map((category: any) => {
+            const filtered =
+              category.items.length > 0
+                ? {
+                    name: category.name,
+                    items: [
+                      ...category.items.filter(
+                        (item: any) =>
+                          item.Status_.select?.name === "Live Available"
+                      ),
+                    ],
+                  }
+                : category;
+            return filtered;
+          })
+        : sortby === "Requested"
+        ? sortbyCategories.map((category: any) => {
+            const filtered =
+              category.items.length > 0
+                ? {
+                    name: category.name,
+                    items: [
+                      ...category.items.filter(
+                        (item: any) => item.Status_.select === null
+                      ),
+                    ],
+                  }
+                : category;
+            return filtered;
+          })
+        : sortbyCategories.map((category: any) => {
+            const filtered =
+              category.items.length > 0
+                ? {
+                    name: category.name,
+                    items: [
+                      ...category.items.filter(
+                        (item: any) =>
+                          item.Status_.select &&
+                          item.Status_.select?.name !== "Live Available"
+                      ),
+                    ],
+                  }
+                : category;
+            return filtered;
+          }),
+    [sortby, sortbyCategories]
+  );
+
+  const sortbyFilter = useMemo(
+    () =>
+      filter === "All"
+        ? sortbyStatus
+        : filter === "Dynamic Data"
+        ? sortbyStatus.map((category: any) => {
+            const filtered =
+              category.items.length > 0
+                ? {
+                    name: category.name,
+                    items: [
+                      ...category.items.filter(
+                        (item: any) =>
+                          item["Dynamic Data"].relation[0]?.id !== undefined
+                      ),
+                    ],
+                  }
+                : category;
+            return filtered;
+          })
+        : sortbyStatus.map((category: any) => {
+            const filtered =
+              category.items.length > 0
+                ? {
+                    name: category.name,
+                    items: [
+                      ...category.items.filter(
+                        (item: any) => !item["Dynamic Data"].relation[0]
+                      ),
+                    ],
+                  }
+                : category;
+            return filtered;
+          }),
+    [filter, sortbyStatus]
+  );
 
   const sortbySearch =
     searchVal === ""
-      ? sortbyStatus
-      : sortbyStatus.map((category: any) => {
+      ? sortbyFilter
+      : sortbyFilter.map((category: any) => {
           const filtered =
             category.items.length > 0
               ? {
@@ -113,39 +156,6 @@ export function DataProvider({ children }: Props) {
           return filtered;
         });
 
-  const sortbyFilter =
-    filter === "All"
-      ? sortbySearch
-      : filter === "Dynamic Data"
-      ? sortbySearch.map((category: any) => {
-          const filtered =
-            category.items.length > 0
-              ? {
-                  name: category.name,
-                  items: [
-                    ...category.items.filter(
-                      (item: any) =>
-                        item["Dynamic Data"].relation[0]?.id !== undefined
-                    ),
-                  ],
-                }
-              : category;
-          return filtered;
-        })
-      : sortbySearch.map((category: any) => {
-          const filtered =
-            category.items.length > 0
-              ? {
-                  name: category.name,
-                  items: [
-                    ...category.items.filter(
-                      (item: any) => !item["Dynamic Data"].relation[0]
-                    ),
-                  ],
-                }
-              : category;
-          return filtered;
-        });
   const handleCategories = () => {
     if (dataSources && categories == null) {
       [...dataSources].map((source: any) => {
@@ -167,11 +177,11 @@ export function DataProvider({ children }: Props) {
       if (sortby !== "All") {
         setCategories(sortbyStatus);
       }
-      if (searchVal !== "") {
-        setCategories(sortbySearch);
-      }
       if (filter !== "All") {
         setCategories(sortbyFilter);
+      }
+      if (searchVal !== "") {
+        setCategories(sortbySearch);
       }
     }
   };
