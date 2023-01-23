@@ -1,6 +1,6 @@
 import { Box, Flex, Heading, Link, Text, VStack } from "@chakra-ui/react";
 import { useContext, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import DataContext from "../../contexts/DataContext";
 import { fetchData } from "../../utils/fetcher";
 import BreadCrumbs from "./component/BreadCrumbs";
@@ -14,6 +14,7 @@ import SimilarDataSources from "./component/SimilarDataSources";
 const SourceData = () => {
   const param = useParams();
   const [filtred, setFiltred] = useState<any>(null);
+  const [filtering, setFiltering] = useState(true);
   const { categories, handleDataSources, handleCategories, dataSources } =
     useContext(DataContext);
 
@@ -32,7 +33,9 @@ const SourceData = () => {
           .replace(/ /g, "-")
           .includes(param.name)
       );
-      setFiltred(val);
+      if (val) {
+        setFiltred(val);
+      } else setFiltering(false);
       console.log(filtred);
     } else {
       getDataSources();
@@ -137,10 +140,12 @@ const SourceData = () => {
           )}
         </VStack>
       </VStack>
-    ) : (
+    ) : filtering ? (
       <Text color={"whiteText"} p={4}>
-        Not Found
+        Loading ...
       </Text>
+    ) : (
+      <Navigate to="/page-not-found" />
     )
   ) : (
     <Text color={"whiteText"} p={4}>

@@ -1,7 +1,7 @@
 import { Flex, Icon, IconButton, Text } from "@chakra-ui/react";
 import { IoArrowBack } from "react-icons/io5";
 import { IoChevronForward } from "react-icons/io5";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   name: string;

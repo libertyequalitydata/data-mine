@@ -8,6 +8,7 @@ import DataSources from "./pages/data-sources/data-sources";
 import DataConnectors from "./pages/data-connectors/data-connectors";
 import SourceData from "./pages/source-data/source-data";
 import ConnectorData from "./pages/connector-data/connector-data";
+import PageNotFound from "./pages/PageNotFound";
 
 export const App = () => (
   <ChakraProvider theme={theme}>
@@ -22,6 +23,7 @@ export const App = () => (
           <Route index element={<DataConnectors />} />
           <Route path=":name" element={<ConnectorData />} />
         </Route>
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </DataProvider>
   </ChakraProvider>
