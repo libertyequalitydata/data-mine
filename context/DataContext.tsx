@@ -8,7 +8,7 @@ import { ReactNode } from "react";
 let res: DataSource[] = [];
 
 export const getStaticPaths = async () => {
-  console.log("getStaticPaths");
+  // console.log("getStaticPaths");
   if (!res[0]) {
     res = await getDataSources();
     console.log(res.length);
